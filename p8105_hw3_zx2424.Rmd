@@ -209,7 +209,7 @@ ny_noaa_tidy %>%
 ``` 
 
 ii) Make a plot to show the distribution of snowfall values greater than 0 and less than 100 separately by year.
-It can be learned from the plot that most common snowfall is between 0 to 30mm. Heavy snow more than 60mm is rare in New York. In terms of the years, snowfall has shown a decreasing trend in these years。
+It can be learned from the plot that most common snowfall is between 0 to 30mm. Heavy snow more than 60mm is rare in New York. In terms of the years, snowfall has shown a decreasing trend in these years.
 ```{r}
 ny_noaa_tidy %>%
   select(year, snow) %>%
