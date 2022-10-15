@@ -142,3 +142,16 @@ data("ny_noaa")
 ny_noaa
 ```
 The size of original dataset is 2595176*7. Key variables include weather station ID, date of observation, precipitation (tens of mm), snowfall (mm), snow depth (mm), maximum temperature (tens of degrees C), and minimum temperature (tens of degree C). A great amount of data is missing for this dataset, reaching `r sum(is.na(ny_noaa))`.
+
+Data cleaning. The original units for temperature is tens of degree C, which is not commonly used. So I converted it into degree C. On the other hand, because the units for precipitation(mm) and snowfall(mm) are reasonable, I left them unchanged.
+```{r}
+ny_noaa_tidy = 
+ny_noaa %>%
+  janitor::clean_names() %>%
+  separate(col = date, into = c("year", "month", "day"), sep = "-") %>%
+  mutate(month = as.integer(month)) %>%
+  mutate(year = as.integer(year)) %>%
+  mutate(day = as.integer(day)) %>%
+  mutate(tmax = as.integer(tmax)/10) %>%
+  mutate(tmin = as.integer(tmin)/10)
+```
