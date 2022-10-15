@@ -60,7 +60,7 @@ instacart %>%
   ggplot(aes(x = aisle, y = n)) + 
   geom_point() + 
   labs(title = "Number of items ordered in each aisle") +
-  theme(axis.text.x = element_text(angle = 60))
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 ```
 
 Make a table showing three most popular items in each of the aisles.
@@ -101,3 +101,14 @@ accel = read_csv("./data/accel_data.csv") %>%
   arrange(day_id, time_minute)
 ```
 The resulting dataset includes variables "week", "day_id", "day", "time_minute", "activity", "weekday_vs_weekend". I introduced new variable "time_minute" to show the exact time (count by minute) of the recorded activity. This dataset has `r nrow(accel)` observations.
+
+Total activity for each day
+```{r}
+accel %>%
+  group_by(day_id) %>%
+  summarize(total = sum(activity)) %>%
+  arrange(day_id) %>%
+  knitr::kable()
+```
+The trend is not apparent for total activity for each day.
+
