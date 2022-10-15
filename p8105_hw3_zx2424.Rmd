@@ -84,3 +84,20 @@ instacart %>%
   spread(key = order_dow, value = mean_hour) %>%
   knitr::kable(digits = 2)
 ```
+
+## Problem 2
+Load, tidy and otherwise wrangle the data. 
+```{r}
+accel = read_csv("./data/accel_data.csv") %>%
+  janitor::clean_names()  %>%
+  pivot_longer(
+    activity_1:activity_1440,
+    names_to = "time_minute",
+    names_prefix = "activity_",
+    values_to = "activity") %>%
+  mutate(weekday_vs_weekend = ifelse(day == "Sunday" | day == "Saturday", "weekend", "weekday"),
+  time_minute = as.integer(time_minute),
+  day = factor(day, levels = str_c(c("Mon", "Tues", "Wednes", "Thurs", "Fri", "Satur", "Sun"), "day"))) %>%
+  arrange(day_id, time_minute)
+```
+The resulting dataset includes variables "week", "day_id", "day", "time_minute", "activity", "weekday_vs_weekend". I introduced new variable "time_minute" to show the exact time (count by minute) of the recorded activity. This dataset has `r nrow(accel)` observations.
