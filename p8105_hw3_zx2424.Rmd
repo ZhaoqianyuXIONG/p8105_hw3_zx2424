@@ -36,10 +36,11 @@ scale_fill_discrete = scale_fill_viridis_d
 data("instacart")
 ```
 
-Make a dataframe based on the "instacart" dataset.
+Make a dataframe based on the "instacart" dataset. 
 ```{r}
 instacart = 
   instacart %>% 
   as_tibble(instacart)
 ```
+The size of the dataset is 1384617*15. Its variables contain information relating to id of order, product, user, department and aisle; name of the product, aisle and department. Also, order in which each product was added into cart, the order sequence number of the user, the day of the week on which the order was placed, the hour of the day on which the order was placed, days of the last order can be learned from the data. Taking the first row of the dataset for example, a customer whose id number is 112108 firstly added Bulgarian Yogurt (id = 49302) into the cart, which belongs to yogurt aisle (id = 120) and daily eggs department (id = 16). The purchase happened on Thursday, 10 am. Days since the last order of the customer is 9.
 
