@@ -36,3 +36,10 @@ scale_fill_discrete = scale_fill_viridis_d
 data("instacart")
 ```
 
+Make a dataframe based on the "instacart" dataset.
+```{r}
+instacart = 
+  instacart %>% 
+  as_tibble(instacart)
+```
+
