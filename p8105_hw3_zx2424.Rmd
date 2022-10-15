@@ -190,3 +190,20 @@ mean_tmax %>%
 Average max temperature in January fluctuated around 0 degree. It firstly increased from 1980 to 1990, then went down until 1995. After that, the temperature fluctuates up and down in a five-year cycle.
 Comparing to that in January, the average max temperature change in July is smaller, almost all are around 25 to 30 degree C. 
 There are some outliers in both average max temperature in January and July. For example, the temperature station whose id is USC00308962 reported the average max temperature at 14 degree C in July on 1988, while other stations at the same time reported the average max temperature over 20 degree C.
+
+i) tmax vs tmin for the full dataset.
+It can be learned from the plot that maximum temperature is mostly distributed between 0 and 30 degree C, while the minimum temperature is mainly between -15 and 15 degree C.
+```{r}
+ny_noaa_tidy %>%
+  select(tmax, tmin) %>%
+  na.omit() %>%
+  pivot_longer(
+    tmax:tmin,
+    names_to = "observation",
+    values_to = "temperature") %>%
+  ggplot(aes(x = temperature, fill = observation)) +
+  geom_density(alpha = .5) +
+  viridis::scale_fill_viridis(discrete = TRUE) +
+  labs(title = "tmax vs tmin")
+
+``` 
