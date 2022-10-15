@@ -112,3 +112,24 @@ accel %>%
 ```
 The trend is not apparent for total activity for each day.
 
+When making the plot for 35 days separately using geom_line(), the plot is too messy and tendency cannot be seen clearly. 
+```{r}
+accel %>%
+  ggplot(aes(x = time_minute, y = activity, group = day_id, color = day)) +
+  geom_line() +
+  labs(
+    title = "24_hour activity time courses for each day",
+    x = "the xth minute of the day",
+  )
+```
+
+Therefore, I use geom_smooth() to make the plot for different days of the week. It can be concluded that for all the days in the week, activity was lower at night (from 0th to 400th minute), perhaps because of sleeping. In the daytime, activities of most days fluctuated slightly except Sunday and Friday. For Friday, average activity reached a high level in the evening (from 1200th to 1300th) minute; While it arrived at its peak in the morning (between 500th to 700th minute) on Sunday.
+```{r}
+accel %>%
+  ggplot(aes(x = time_minute, y = activity, color = day)) +
+  geom_smooth(se = FALSE) +
+  labs(
+    title = "24_hour activity time courses for each day",
+    x = "the xth minute of the day",
+  )
+```
