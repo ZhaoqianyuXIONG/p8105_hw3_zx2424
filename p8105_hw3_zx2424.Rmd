@@ -155,3 +155,14 @@ ny_noaa %>%
   mutate(tmax = as.integer(tmax)/10) %>%
   mutate(tmin = as.integer(tmin)/10)
 ```
+
+The most commonly observed value for snowfall is 0. Because it does not snow for most days of a year in New York. Therefore, no snowfall is mostly commonly observed.
+```{r}
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+common_snow = getmode(pull(ny_noaa, snow))
+c(common_snow)
+```
