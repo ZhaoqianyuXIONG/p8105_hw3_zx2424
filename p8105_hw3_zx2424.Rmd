@@ -133,3 +133,12 @@ accel %>%
     x = "the xth minute of the day",
   )
 ```
+
+## Problem 3
+```{r}
+library(p8105.datasets)
+data("ny_noaa")
+
+ny_noaa
+```
+The size of original dataset is 2595176*7. Key variables include weather station ID, date of observation, precipitation (tens of mm), snowfall (mm), snow depth (mm), maximum temperature (tens of degrees C), and minimum temperature (tens of degree C). A great amount of data is missing for this dataset, reaching `r sum(is.na(ny_noaa))`.
