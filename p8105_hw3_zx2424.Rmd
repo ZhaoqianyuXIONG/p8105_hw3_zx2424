@@ -166,3 +166,27 @@ getmode <- function(v) {
 common_snow = getmode(pull(ny_noaa, snow))
 c(common_snow)
 ```
+
+Make a plot to show the average max temperature in January and in July across the year.
+```{r}
+mean_tmax = 
+  ny_noaa_tidy %>%
+  filter(month == 1 | month == 7) %>%
+  select(id, year, month, tmax) %>%
+  group_by(id, year, month) %>%
+  summarize(average_tmax = mean(tmax, na.rm = TRUE)) 
+
+mean_tmax %>%
+  na.omit() %>%
+  ggplot(aes(x = year, y = average_tmax, group = id)) +
+  geom_line() +
+  facet_grid(~month) +
+  labs(
+    title = "Average max temperature across the years",
+    x = "year",
+    y = "average max temperature"
+  )
+```
+Average max temperature in January fluctuated around 0 degree. It firstly increased from 1980 to 1990, then went down until 1995. After that, the temperature fluctuates up and down in a five-year cycle.
+Comparing to that in January, the average max temperature change in July is smaller, almost all are around 25 to 30 degree C. 
+There are some outliers in both average max temperature in January and July. For example, the temperature station whose id is USC00308962 reported the average max temperature at 14 degree C in July on 1988, while other stations at the same time reported the average max temperature over 20 degree C.
